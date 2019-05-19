@@ -11,6 +11,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -22,7 +25,13 @@ public class ConfirmBoxController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Image image = new Image(getClass().getResourceAsStream("/image/q.png"));
+    
     public static boolean answer;
+    
+    @FXML
+    private Label notice;
+    
     @FXML
     private Button yesButton;
     
@@ -48,6 +57,8 @@ public class ConfirmBoxController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
+        notice.setGraphic(new ImageView(image));
     }    
     
 }

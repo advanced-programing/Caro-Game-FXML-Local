@@ -8,26 +8,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="hellofxml.ConfirmBoxController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="sub_background" stylesheets="@../style/lableStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.ConfirmBoxController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="sub_background">
          <top>
-            <Label text="Are you sure want to quit?" BorderPane.alignment="CENTER">
+            <Label fx:id="notice" styleClass="label3" text="Are you sure want to quit" BorderPane.alignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
             </Label>
          </top>
          <center>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="140.0" prefWidth="400.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="yesButton" mnemonicParsing="false" onAction="#yesAction" prefHeight="30.0" prefWidth="60.0" text="Yes">
+                  <Button fx:id="yesButton" mnemonicParsing="false" onAction="#yesAction" prefHeight="30.0" prefWidth="80.0" styleClass="button3" text="Yes">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="noButton" mnemonicParsing="false" onAction="#noAction" prefHeight="30.0" prefWidth="60.0" text="No">
+                  <Button fx:id="noButton" mnemonicParsing="false" onAction="#noAction" prefHeight="30.0" prefWidth="80.0" styleClass="button4" text="No">
                      <font>
                         <Font size="15.0" />
                      </font>

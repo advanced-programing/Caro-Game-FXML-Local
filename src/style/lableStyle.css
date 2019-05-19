@@ -8,3 +8,99 @@ and open the template in the editor.
     Author     : USER
 */
 
+.background {
+    -fx-background-image: url(../image/pic11.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    
+}
+.sub_background {
+    -fx-background-image: url(../image/new.jpg);
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    
+}
+.board_background {
+    -fx-background-image: url(../image/backBoard.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    
+}
+
+.button1 {
+  -fx-background-color: white; 
+  -fx-text-fill: black;
+  -fx-border: 2px solid #008CBA;
+  -fx-font-size: 16px;
+  -fx-font-family: "Arial";
+  -fx-font-weight: bold;
+}
+.button1:hover {
+  -fx-background-color: orange;
+  -fx-text-fill: white;
+}
+.button2 {
+  -fx-background-color: white; 
+  -fx-text-fill: black;
+  -fx-border: 2px solid #008CBA;
+  -fx-font-size: 16px;
+  -fx-font-family: "Arial";
+  -fx-font-weight: bold;
+}
+
+.button2:hover {
+  -fx-background-color: #008CBA;
+  -fx-text-fill: white;
+}
+
+.button3 {
+  -fx-background-color: white; 
+  -fx-text-fill: black;
+  -fx-border: 2px solid #008CBA;
+  -fx-font-size: 16px;
+  -fx-font-family: "Arial";
+  -fx-font-weight: bold;
+}
+.button3:hover {
+  -fx-background-color: rgb(60, 179, 113);
+  -fx-text-fill: white;
+}
+.button4 {
+  -fx-background-color: white; 
+  -fx-text-fill: black;
+  -fx-border: 2px solid #008CBA;
+  -fx-font-size: 16px;
+  -fx-font-family: "Arial";
+  -fx-font-weight: bold;
+}
+.button4:hover {
+  -fx-background-color: rgb(255, 99, 71);
+  -fx-text-fill: white;
+}
+.label {
+   -fx-text-fill: black;
+   -fx-font-size: 33px;
+   -fx-font-family: "Arial";
+}
+.label2 {
+   -fx-text-fill: white;
+   -fx-font-size: 33px;
+   -fx-font-family: "Arial";
+}
+.label1 {
+   -fx-text-fill: RED;
+   -fx-font-size: 33px;
+   -fx-font-family: "Arial";
+}
+.label3{
+   -fx-text-fill: white;
+   -fx-font-size: 25px;
+   -fx-font-family: "Arial";
+}
+.label4{
+   -fx-text-fill: white;
+   -fx-font-size: 22px;
+   -fx-font-family: "Arial";
+}

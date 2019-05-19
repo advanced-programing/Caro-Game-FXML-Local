@@ -5,6 +5,7 @@
  */
 package hellofxml;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 /**
@@ -77,6 +80,8 @@ public class FXMLGameBoardController implements Initializable {
     private static String userName2;
     private Image XLabel = new Image("/image/X.PNG");
     private Image OLabel = new Image("/image/O.PNG");
+    
+    Media sound = new Media(this.getClass().getResource("/sound/click.mp3").toExternalForm());
     
     @FXML 
     private HBox boardPane;
@@ -131,7 +136,7 @@ public class FXMLGameBoardController implements Initializable {
     
     @FXML 
     private void handleNewGame(){
-        player2Name.setTextFill(Color.BLACK);
+        player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.RED);
         PLAYABLE = true;
         currentPlayer = SEED.X;
@@ -144,8 +149,8 @@ public class FXMLGameBoardController implements Initializable {
     }
     @FXML
     private void handleNewMatch(){
-        player2Name.setTextFill(Color.BLACK);
-        player1Name.setTextFill(Color.BLACK);
+        player2Name.setTextFill(Color.WHITE);
+        player1Name.setTextFill(Color.WHITE);
         if(gameType==1){
             if(currentState==GameState.O_WIN){
                 currentPlayer = SEED.O;
@@ -176,7 +181,8 @@ public class FXMLGameBoardController implements Initializable {
         // TODO
         gameType = FXMLGameTypeController.type;
         gameLevel = ChooseLevelBoxController.level;
-        
+        player2Name.setTextFill(Color.WHITE);
+        player1Name.setTextFill(Color.RED);
         
         if(gameType==1){
             userName1 = PlayerInforBoxController.name1;
@@ -204,7 +210,7 @@ public class FXMLGameBoardController implements Initializable {
         gc = board.getGraphicsContext2D(); 
         boardPane.getChildren().add(board);
         drawBoard(BOARD_SIZE, gc);
-        player2Name.setTextFill(Color.BLACK);
+        player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.RED);
         
         System.out.println("draw board");
@@ -311,12 +317,14 @@ public class FXMLGameBoardController implements Initializable {
     
     //choi mot nuoc
     private boolean playAt(int r, int c) throws IOException{
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
          if(r<BOARD_SIZE && c<BOARD_SIZE && PLAYABLE==true){
             if(playingMap[r][c] == SEED.EMPTY){
                 playingMap[r][c] = currentPlayer;
                 if(currentPlayer == SEED.X){
                     player2Name.setTextFill(Color.SLATEBLUE);
-                    player1Name.setTextFill(Color.BLACK);
+                    player1Name.setTextFill(Color.WHITE);
                     drawCross(r, c);
                     
                     if(checkWin(r,c)){
@@ -324,7 +332,7 @@ public class FXMLGameBoardController implements Initializable {
                         score1++;
                         currentState = GameState.X_WIN;
                         PLAYABLE=false; 
-                        player2Name.setTextFill(Color.BLACK);
+                        player2Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
                         score.setText(score1+" : "+score2);
                         return true;
@@ -334,7 +342,7 @@ public class FXMLGameBoardController implements Initializable {
                        // notice.setText("It's a draw, gameover!");
                        currentState = GameState.DRAW;
                        PLAYABLE=false; 
-                       player2Name.setTextFill(Color.BLACK);
+                       player2Name.setTextFill(Color.WHITE);
                        Hellofxml.addNoticeBox();
                         //Hellofxml.addConfirmBox();
                     }
@@ -347,7 +355,7 @@ public class FXMLGameBoardController implements Initializable {
                 }
                 else{
                     player1Name.setTextFill(Color.RED);
-                    player2Name.setTextFill(Color.BLACK);
+                    player2Name.setTextFill(Color.WHITE);
                     drawCircle(r, c);
                  
                     if(checkWin(r,c)){
@@ -355,7 +363,7 @@ public class FXMLGameBoardController implements Initializable {
                         score2++;
                         currentState = GameState.O_WIN;
                         PLAYABLE=false; 
-                        player1Name.setTextFill(Color.BLACK);
+                        player1Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
                         score.setText(score1+" : "+score2);
                         return true;
@@ -365,7 +373,7 @@ public class FXMLGameBoardController implements Initializable {
                        // notice.setText("It's a draw, gameover!");
                         currentState = GameState.DRAW;
                         PLAYABLE=false; 
-                        player1Name.setTextFill(Color.BLACK);
+                        player1Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
                         //Hellofxml.addConfirmBox();
                     }

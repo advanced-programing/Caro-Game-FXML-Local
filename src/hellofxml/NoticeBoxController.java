@@ -12,6 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
@@ -23,6 +27,8 @@ public class NoticeBoxController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Image image = new Image(getClass().getResourceAsStream("/image/information.png"));
+    Media sound = new Media(this.getClass().getResource("/sound/win.mp3").toExternalForm());
     
     @FXML
     private Button okButton;
@@ -43,6 +49,9 @@ public class NoticeBoxController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        noticeLabel.setGraphic(new ImageView(image));
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
         if(null != FXMLGameBoardController.getCurrentState())
             switch (FXMLGameBoardController.getCurrentState()) {
             case X_WIN:

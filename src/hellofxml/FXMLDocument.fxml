@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../style/lableStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.FXMLDocumentController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../style/lableStyle.css">
          <top>
-            <Label fx:id="message" prefHeight="120.0" prefWidth="417.0" text="WELLCOME TO CARO GAME" BorderPane.alignment="CENTER">
+            <Label fx:id="message" prefHeight="155.0" prefWidth="461.0" text="WELLCOME TO CARO GAME" BorderPane.alignment="CENTER">
                <font>
                   <Font size="33.0" />
                </font>
@@ -21,21 +21,21 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="165.0" prefWidth="339.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="chooseGameSize" alignment="CENTER" mnemonicParsing="false" onAction="#handleGameSize" prefHeight="30.0" prefWidth="90.0" text="Game size">
+                  <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="110.0" styleClass="button3" text="Start">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="chooseGameType" mnemonicParsing="false" onAction="#handleGameType" prefHeight="30.0" prefWidth="90.0" text="Game type">
+                  <Button fx:id="chooseGameSize" alignment="CENTER" mnemonicParsing="false" onAction="#handleGameSize" prefHeight="30.0" prefWidth="110.0" styleClass="button1" text="Game size">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" prefHeight="30.0" prefWidth="90.0" text="Start">
+                  <Button fx:id="chooseGameType" mnemonicParsing="false" onAction="#handleGameType" prefHeight="30.0" prefWidth="110.0" styleClass="button2" text="Game type">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="quit" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="90.0" text="Quit">
+                  <Button fx:id="quit" mnemonicParsing="false" onAction="#quitGame" prefHeight="30.0" prefWidth="110.0" styleClass="button4" text="Quit">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font></Button>
                </children>
                <padding>

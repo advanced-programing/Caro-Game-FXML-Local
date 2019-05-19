@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.FXMLGameTypeController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/lableStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.FXMLGameTypeController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background">
          <top>
-            <Label prefHeight="120.0" prefWidth="507.0" text=" Choose Game Type You Want To Play" BorderPane.alignment="CENTER">
+            <Label prefHeight="155.0" prefWidth="333.0" text="Choose Type of Game" BorderPane.alignment="CENTER">
                <font>
                   <Font size="30.0" />
                </font>
@@ -21,30 +21,25 @@
          <center>
             <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="playerTypeButton" mnemonicParsing="false" onAction="#playerTypeAction" prefHeight="30.0" prefWidth="180.0" text="Play with another player">
+                  <Button fx:id="playerTypeButton" mnemonicParsing="false" onAction="#playerTypeAction" prefHeight="32.0" prefWidth="215.0" styleClass="button2" text="Play with another player">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="computerTypeButton" mnemonicParsing="false" onAction="#computerTypeAction" prefHeight="30.0" prefWidth="180.0" text="Play with computer">
+                  <Button fx:id="computerTypeButton" mnemonicParsing="false" onAction="#computerTypeAction" prefHeight="30.0" prefWidth="215.0" styleClass="button2" text="Play with computer">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" prefHeight="30.0" prefWidth="215.0" styleClass="button3" text="Home">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
                </children>
                <padding>
                   <Insets top="10.0" />
                </padding>
             </VBox>
          </center>
-         <bottom>
-            <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" prefHeight="30.0" prefWidth="90.0" text="Home" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets bottom="10.0" />
-               </BorderPane.margin>
-            </Button>
-         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
