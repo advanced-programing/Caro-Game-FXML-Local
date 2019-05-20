@@ -18,6 +18,10 @@ import javafx.scene.control.Button;
  * @author USER
  */
 public class FXMLGameSizeController implements Initializable {
+    private Hellofxml application; 
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     public static int size=5;
     /**
      * Initializes the controller class.
@@ -27,7 +31,7 @@ public class FXMLGameSizeController implements Initializable {
     
     @FXML
     private void goHome() throws IOException{
-        Hellofxml.setMainMenu();
+        application.setMainMenu();
     }
     
     @FXML

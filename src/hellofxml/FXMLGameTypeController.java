@@ -8,6 +8,7 @@ package hellofxml;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class FXMLGameTypeController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private Hellofxml application; 
     public static int type=1;
     
     @FXML
@@ -32,25 +34,37 @@ public class FXMLGameTypeController implements Initializable {
     
     @FXML
     private Button computerTypeButton;
+    @FXML
+    private Button bt_remote;
     
     @FXML
     private void playerTypeAction(){
         type = 1;
     }
     
+    
     @FXML
     private void computerTypeAction() throws IOException{
         type = 2;
-        Hellofxml.setGameLevelMenu();
+        application.setGameLevelMenu();
     }
     
     @FXML
     private void goHome() throws IOException{
-        Hellofxml.setMainMenu();
+        application.setMainMenu();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
+    @FXML
+    private void playRemote(ActionEvent event) {
+        System.out.println("CCL " + "User choose play with remote clients");
+        application.userChoseRemote(true);
+    }
     
 }

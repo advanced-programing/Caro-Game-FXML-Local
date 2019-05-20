@@ -38,11 +38,15 @@ public class ConfirmBoxController implements Initializable {
     @FXML
     private Button noButton;
     
+    private Hellofxml application; 
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     @FXML
     private void yesAction() throws IOException{
         answer = true;
         System.out.println("answer: "+ answer);
-        Hellofxml.setMainMenu();
+        application.setMainMenu();
         Hellofxml.confirmBox.close();
     }
     

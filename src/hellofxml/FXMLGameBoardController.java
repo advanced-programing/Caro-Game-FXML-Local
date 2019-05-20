@@ -5,20 +5,16 @@
  */
 package hellofxml;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -26,12 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -42,7 +33,10 @@ import javafx.scene.paint.Color;
  * @author USER
  */
 public class FXMLGameBoardController implements Initializable {
-
+    private Hellofxml application; 
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     /**
      * Initializes the controller class.
      */
@@ -61,31 +55,31 @@ public class FXMLGameBoardController implements Initializable {
     private int gameLevel;
     private Position bestPos = new Position();
     private int mainPointStep = 5;
-    
-    private enum SEED{
+
+    private enum SEED {
         EMPTY, X, O;
     }
-    
+
     private SEED currentPlayer;
-    
+
     private SEED computerSeed = SEED.O;
     private SEED playerSeed = SEED.X;
-    
+
     private GraphicsContext gc;
     private Canvas board;
-    
+
     private static GameState currentState = GameState.PLAYING;
-    
+
     private static String userName1;
     private static String userName2;
     private Image XLabel = new Image("/image/X.PNG");
     private Image OLabel = new Image("/image/O.PNG");
-    
+
     Media sound = new Media(this.getClass().getResource("/sound/click.mp3").toExternalForm());
-    
-    @FXML 
+
+    @FXML
     private HBox boardPane;
-  
+
     //@FXML
     //private Label notice;
     @FXML
@@ -93,89 +87,88 @@ public class FXMLGameBoardController implements Initializable {
 
     @FXML
     private Label player1Name;
-    
+
     @FXML
     private Label score;
     @FXML
     private Label player2Name;
-    
+
     @FXML
     private Button newGame;
 
     @FXML
     private Button quit;
-    
+
     @FXML
     private Label player1Label;
-    
+
     @FXML
     private Label player2Label;
-    
+
     @FXML
-    private void handle2Player(MouseEvent event) throws IOException{
+    private void handle2Player(MouseEvent event) throws IOException {
         int r = (int) ((event.getX() - PAD) / (CELL_SIZE + 4));
         int c = (int) ((event.getY() - PAD) / (CELL_SIZE + 4));
- 
-        if(gameType==1){
+
+        if (gameType == 1) {
             playAt(r, c);
-        }
-        else{
+        } else {
             //System.out.println("play with computer");
-            if(PLAYABLE){
-                    playAt(r, c);
-                    if(PLAYABLE){
-                        Position P = new Position();
-                        P = findBestPosition(computerSeed, gameLevel);
-                        //System.out.println("Scores = "+P.getPoint());
-                        //System.out.println("r = "+P.getRow()+"  c = "+P.getColumn());
-                        playAt(P.getRow(), P.getColumn());
-                    }
+            if (PLAYABLE) {
+                playAt(r, c);
+                if (PLAYABLE) {
+                    Position P = new Position();
+                    P = findBestPosition(computerSeed, gameLevel);
+                    //System.out.println("Scores = "+P.getPoint());
+                    //System.out.println("r = "+P.getRow()+"  c = "+P.getColumn());
+                    playAt(P.getRow(), P.getColumn());
+                }
             }
-        }         
+        }
     }
-    
-    @FXML 
-    private void handleNewGame(){
+
+    @FXML
+    private void handleNewGame() {
         player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.RED);
         PLAYABLE = true;
         currentPlayer = SEED.X;
-        score1=0;
-        score2=0;
-        score.setText(score1+" : "+score2);
+        score1 = 0;
+        score2 = 0;
+        score.setText(score1 + " : " + score2);
         resetBoard();
         drawBoard(BOARD_SIZE, gc);
         //notice.setText("Player "+userName1+" go...");
     }
+
     @FXML
-    private void handleNewMatch(){
+    private void handleNewMatch() {
         player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.WHITE);
-        if(gameType==1){
-            if(currentState==GameState.O_WIN){
+        if (gameType == 1) {
+            if (currentState == GameState.O_WIN) {
                 currentPlayer = SEED.O;
                 player2Name.setTextFill(Color.SLATEBLUE);
-            }
-            else{
+            } else {
                 currentPlayer = SEED.X;
                 player1Name.setTextFill(Color.RED);
             }
-        }
-        else{
+        } else {
             currentPlayer = SEED.X;
             player1Name.setTextFill(Color.RED);
         }
-        
+
         resetBoard();
         drawBoard(BOARD_SIZE, gc);
         currentState = GameState.PLAYING;
         PLAYABLE = true;
     }
+
     @FXML
     private void quitGame(ActionEvent event) throws IOException {
         Hellofxml.addConfirmBox();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -183,50 +176,50 @@ public class FXMLGameBoardController implements Initializable {
         gameLevel = ChooseLevelBoxController.level;
         player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.RED);
-        
-        if(gameType==1){
+
+        if (gameType == 1) {
             userName1 = PlayerInforBoxController.name1;
             userName2 = PlayerInforBoxController.name2;
-        }
-        else{
+        } else {
             userName1 = "You";
             userName2 = "Computer";
         }
-        
-        player1Name.setText(""+userName1);
-        player2Name.setText(""+userName2);
+
+        player1Name.setText("" + userName1);
+        player2Name.setText("" + userName2);
         player1Label.setGraphic(new ImageView(XLabel));
         player2Label.setGraphic(new ImageView(OLabel));
-        score1=0;
-        score2=0;
-        score.setText(score1+" : "+score2);
+        score1 = 0;
+        score2 = 0;
+        score.setText(score1 + " : " + score2);
         currentPlayer = SEED.X;
-        
-        System.out.println("gameType = "+gameType+"  gameLevel "+gameLevel);
-        
+
+        System.out.println("gameType = " + gameType + "  gameLevel " + gameLevel);
+
         BOARD_SIZE = FXMLGameSizeController.size;
         //notice.setText("Player "+userName1+" go...");
         board = new Canvas(BOARD_WIDTH, BOARD_HEIGHT);
-        gc = board.getGraphicsContext2D(); 
+        gc = board.getGraphicsContext2D();
         boardPane.getChildren().add(board);
         drawBoard(BOARD_SIZE, gc);
         player2Name.setTextFill(Color.WHITE);
         player1Name.setTextFill(Color.RED);
-        
+
         System.out.println("draw board");
         resetBoard();
-    }    
-    
-    public boolean checkDraw(){
-        for(int r=0; r<BOARD_SIZE; r++){
-            for(int c=0; c<BOARD_SIZE; c++){
-                if(playingMap[r][c]==SEED.EMPTY)
+    }
+
+    public boolean checkDraw() {
+        for (int r = 0; r < BOARD_SIZE; r++) {
+            for (int c = 0; c < BOARD_SIZE; c++) {
+                if (playingMap[r][c] == SEED.EMPTY) {
                     return false;
+                }
             }
         }
         return true;
     }
-    
+
     private boolean checkWin(int row, int column) {
         SEED crPlayer = playingMap[row][column];
         if (crPlayer == SEED.EMPTY) {
@@ -236,12 +229,12 @@ public class FXMLGameBoardController implements Initializable {
         int i = row, j = column;
         //checking by row
         j = column - 1;
-        while (j>=0 && playingMap[i][j]==crPlayer) {
+        while (j >= 0 && playingMap[i][j] == crPlayer) {
             count++;
             j--;
         }
         j = column + 1;
-        while (j<BOARD_SIZE && playingMap[i][j]==crPlayer) {
+        while (j < BOARD_SIZE && playingMap[i][j] == crPlayer) {
             count++;
             j++;
         }
@@ -254,13 +247,13 @@ public class FXMLGameBoardController implements Initializable {
         //checking by column
         i = row - 1;
         j = column;
-        while (i>=0 && playingMap[i][j]==crPlayer) {
+        while (i >= 0 && playingMap[i][j] == crPlayer) {
             count++;
             i--;
         }
 
         i = row + 1;
-        while (i<BOARD_SIZE && playingMap[i][j]==crPlayer) {
+        while (i < BOARD_SIZE && playingMap[i][j] == crPlayer) {
             count++;
             i++;
         }
@@ -273,7 +266,7 @@ public class FXMLGameBoardController implements Initializable {
         //checking by first diagonal
         i = row - 1;
         j = column - 1;
-        while (i>=0 && j>=0 && playingMap[i][j]==crPlayer) {
+        while (i >= 0 && j >= 0 && playingMap[i][j] == crPlayer) {
             count++;
             i--;
             j--;
@@ -281,7 +274,7 @@ public class FXMLGameBoardController implements Initializable {
 
         i = row + 1;
         j = column + 1;
-        while (i<BOARD_SIZE && j<BOARD_SIZE && playingMap[i][j]==crPlayer) {
+        while (i < BOARD_SIZE && j < BOARD_SIZE && playingMap[i][j] == crPlayer) {
             count++;
             i++;
             j++;
@@ -294,7 +287,7 @@ public class FXMLGameBoardController implements Initializable {
         //checking by second diagonal
         i = row + 1;
         j = column - 1;
-        while (i<BOARD_SIZE && j>=0 && playingMap[i][j]==crPlayer ) {
+        while (i < BOARD_SIZE && j >= 0 && playingMap[i][j] == crPlayer) {
             count++;
             i++;
             j--;
@@ -302,7 +295,7 @@ public class FXMLGameBoardController implements Initializable {
 
         i = row - 1;
         j = column + 1;
-        while (i>=0 && j<BOARD_SIZE && playingMap[i][j]==crPlayer) {
+        while (i >= 0 && j < BOARD_SIZE && playingMap[i][j] == crPlayer) {
             count++;
             i--;
             j++;
@@ -314,73 +307,68 @@ public class FXMLGameBoardController implements Initializable {
             return false;
         }
     }
-    
+
     //choi mot nuoc
-    private boolean playAt(int r, int c) throws IOException{
+    private boolean playAt(int r, int c) throws IOException {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-         if(r<BOARD_SIZE && c<BOARD_SIZE && PLAYABLE==true){
-            if(playingMap[r][c] == SEED.EMPTY){
+        if (r < BOARD_SIZE && c < BOARD_SIZE && PLAYABLE == true) {
+            if (playingMap[r][c] == SEED.EMPTY) {
                 playingMap[r][c] = currentPlayer;
-                if(currentPlayer == SEED.X){
+                if (currentPlayer == SEED.X) {
                     player2Name.setTextFill(Color.SLATEBLUE);
                     player1Name.setTextFill(Color.WHITE);
                     drawCross(r, c);
-                    
-                    if(checkWin(r,c)){
+
+                    if (checkWin(r, c)) {
                         //notice.setText("Player "+userName1+" wins, gameover!");
                         score1++;
                         currentState = GameState.X_WIN;
-                        PLAYABLE=false; 
+                        PLAYABLE = false;
                         player2Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
-                        score.setText(score1+" : "+score2);
+                        score.setText(score1 + " : " + score2);
                         return true;
                         //Hellofxml.addConfirmBox();
-                    }
-                    else if(checkDraw()){
-                       // notice.setText("It's a draw, gameover!");
-                       currentState = GameState.DRAW;
-                       PLAYABLE=false; 
-                       player2Name.setTextFill(Color.WHITE);
-                       Hellofxml.addNoticeBox();
+                    } else if (checkDraw()) {
+                        // notice.setText("It's a draw, gameover!");
+                        currentState = GameState.DRAW;
+                        PLAYABLE = false;
+                        player2Name.setTextFill(Color.WHITE);
+                        Hellofxml.addNoticeBox();
                         //Hellofxml.addConfirmBox();
-                    }
-                    else{
+                    } else {
                         currentState = GameState.PLAYING;
                         currentPlayer = SEED.O;
-                        PLAYABLE=true; 
+                        PLAYABLE = true;
                         //notice.setText("Player "+userName2+" go...");
                     }
-                }
-                else{
+                } else {
                     player1Name.setTextFill(Color.RED);
                     player2Name.setTextFill(Color.WHITE);
                     drawCircle(r, c);
-                 
-                    if(checkWin(r,c)){
+
+                    if (checkWin(r, c)) {
                         //notice.setText("Player "+userName2+" wins, gameover!");
                         score2++;
                         currentState = GameState.O_WIN;
-                        PLAYABLE=false; 
+                        PLAYABLE = false;
                         player1Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
-                        score.setText(score1+" : "+score2);
+                        score.setText(score1 + " : " + score2);
                         return true;
                         //Hellofxml.addConfirmBox();
-                    }
-                    else if(checkDraw()){
-                       // notice.setText("It's a draw, gameover!");
+                    } else if (checkDraw()) {
+                        // notice.setText("It's a draw, gameover!");
                         currentState = GameState.DRAW;
-                        PLAYABLE=false; 
+                        PLAYABLE = false;
                         player1Name.setTextFill(Color.WHITE);
                         Hellofxml.addNoticeBox();
                         //Hellofxml.addConfirmBox();
-                    }
-                    else{
+                    } else {
                         currentState = GameState.PLAYING;
                         currentPlayer = SEED.X;
-                        PLAYABLE=true; 
+                        PLAYABLE = true;
                         //notice.setText("Player "+userName1+" go...");
                     }
                 }
@@ -389,25 +377,25 @@ public class FXMLGameBoardController implements Initializable {
         return false;
     }
 
-    private Position findBestPosition(SEED turn, int level){
+    private Position findBestPosition(SEED turn, int level) {
         Position bestPos = new Position();
-        
+
         List<Position> validPos = new Vector<>();
-        for(int r=0; r<BOARD_SIZE; r++){
-            for(int c=0; c<BOARD_SIZE; c++){
-                if(playingMap[r][c] == SEED.EMPTY){
+        for (int r = 0; r < BOARD_SIZE; r++) {
+            for (int c = 0; c < BOARD_SIZE; c++) {
+                if (playingMap[r][c] == SEED.EMPTY) {
                     Position pos = new Position(r, c);
                     int point = getMainPointAt(turn, r, c, playingMap);
-                    if(point >= 4*mainPointStep){
-                        point = 6*mainPointStep;
+                    if (point >= 4 * mainPointStep) {
+                        point = 6 * mainPointStep;
                     }
                     pos.setPoint(point);
                     validPos.add(pos);
                 }
             }
         }
-        
-        if(!validPos.isEmpty()){
+
+        if (!validPos.isEmpty()) {
             Comparator compareProc = new Comparator<Position>() {
                 @Override
                 public int compare(Position o1, Position o2) {
@@ -420,25 +408,25 @@ public class FXMLGameBoardController implements Initializable {
                     }
                 }
             };
-            
-            switch(level){
-                case 1:{//chon mot vi tri random
+
+            switch (level) {
+                case 1: {//chon mot vi tri random
                     int n = validPos.size();
                     Random rand = new Random();
                     bestPos = validPos.get(rand.nextInt(n));
                     break;
                 }
-                case 2 :{ //chon vi tri co diem thang cao nhat
+                case 2: { //chon vi tri co diem thang cao nhat
                     validPos.sort(compareProc);
                     bestPos = validPos.get(0);
                     break;
                 }
-                case 3:{ //xem xet giua diem thang va diem thua
-                    for(int i=0; i<validPos.size(); i++){
+                case 3: { //xem xet giua diem thang va diem thua
+                    for (int i = 0; i < validPos.size(); i++) {
                         Position p = validPos.get(i);
                         int oppPoint = getOpponentPointAt(turn, validPos.get(i).getRow(), validPos.get(i).getColumn());
-                        if(oppPoint >=3 ){
-                            validPos.get(i).setPoint(oppPoint+1);
+                        if (oppPoint >= 3) {
+                            validPos.get(i).setPoint(oppPoint + 1);
                         }
                     }
                     validPos.sort(compareProc);
@@ -449,8 +437,8 @@ public class FXMLGameBoardController implements Initializable {
         }
         return bestPos;
     }
-    
-    private int getMainPointAt(SEED turn, int row, int column, SEED playingMap[][]){
+
+    private int getMainPointAt(SEED turn, int row, int column, SEED playingMap[][]) {
         int count = 0;  //count the number of positions next to (row, column)
         int i = row, j = column;
         int r_count = 0;
@@ -543,7 +531,7 @@ public class FXMLGameBoardController implements Initializable {
         return Math.max(Math.max(r_count, c_count), Math.max(fd_count, sd_count));
 
     }
-    
+
     private int getOpponentPointAt(SEED turn, int row, int column) {
         int count = 0;  //count the number of positions next to (row, column)
         int i = row, j = column;
@@ -637,6 +625,7 @@ public class FXMLGameBoardController implements Initializable {
 
         return Math.max(Math.max(r_count, c_count), Math.max(fd_count, sd_count));
     }
+
     /*private Position findBestPosition(){
         Position bestPos = new Position();
         int bestVal = Integer.MIN_VALUE;
@@ -657,8 +646,8 @@ public class FXMLGameBoardController implements Initializable {
         }
         return bestPos;
     } */
-    
-   /* private int miniMax(int depth, SEED turn, int alpha, int beta, SEED map[][]){
+
+ /* private int miniMax(int depth, SEED turn, int alpha, int beta, SEED map[][]){
         int bestRow=-1;
         int bestCol=-1;
         int score;
@@ -704,9 +693,7 @@ public class FXMLGameBoardController implements Initializable {
         return (turn==computerSeed?alpha:beta);
     } 
     }*/
-    
-    
-    /*private List<Position> findValidPos(){
+ /*private List<Position> findValidPos(){
         List<Position> validPos = new ArrayList<>();
         
         if(PLAYABLE == false)
@@ -758,55 +745,57 @@ public class FXMLGameBoardController implements Initializable {
         }
         return bestScore;
     } */
-   
-    private boolean isGameOver(){
+    private boolean isGameOver() {
         //printMap(map);
-        for(int r=0; r<BOARD_SIZE; r++){
-            for(int c=0; c<BOARD_SIZE; c++){
-                if(checkWin(r,c)){
+        for (int r = 0; r < BOARD_SIZE; r++) {
+            for (int c = 0; c < BOARD_SIZE; c++) {
+                if (checkWin(r, c)) {
                     //System.out.println("win at r, c: "+r+" "+c);
                     return true;
                 }
             }
         }
-        if(checkDraw()){
-           // System.out.println("Draw");
+        if (checkDraw()) {
+            // System.out.println("Draw");
             return true;
         }
         return false;
     }
-    
-    public void printMap(SEED map[][]){
-        for(int r=0; r<BOARD_SIZE; r++){
-            for(int c=0; c<BOARD_SIZE; c++){
-                 int t;
-                 if(map[r][c]==SEED.EMPTY)
-                     t=0;
-                 else if(map[r][c]==SEED.X)
-                     t=1;
-                 else
-                     t=2;
-                 System.out.print(" "+t);
+
+    public void printMap(SEED map[][]) {
+        for (int r = 0; r < BOARD_SIZE; r++) {
+            for (int c = 0; c < BOARD_SIZE; c++) {
+                int t;
+                if (map[r][c] == SEED.EMPTY) {
+                    t = 0;
+                } else if (map[r][c] == SEED.X) {
+                    t = 1;
+                } else {
+                    t = 2;
+                }
+                System.out.print(" " + t);
             }
-             System.out.println("");
+            System.out.println("");
         }
     }
-    
-    public void resetBoard(){
-        if(playingMap != null){
-            playingMap=null;
+
+    public void resetBoard() {
+        if (playingMap != null) {
+            playingMap = null;
         }
         playingMap = new SEED[BOARD_SIZE][BOARD_SIZE];
-        for(int r=0; r<BOARD_SIZE; r++)
-            for(int c=0; c<BOARD_SIZE; c++)
+        for (int r = 0; r < BOARD_SIZE; r++) {
+            for (int c = 0; c < BOARD_SIZE; c++) {
                 playingMap[r][c] = SEED.EMPTY;
+            }
+        }
     }
-    
+
     private void drawCross(int row, int col) {
         int inner_pad = 3;
         int border_width = 4;
         gc.clearRect(PAD + row * (CELL_SIZE + border_width), PAD + col * (CELL_SIZE + border_width), CELL_SIZE, CELL_SIZE);
-        
+
         gc.fillRect(PAD + row * (CELL_SIZE + border_width), PAD + col * (CELL_SIZE + border_width), CELL_SIZE, CELL_SIZE);
         gc.setStroke(Color.RED);
         gc.setLineWidth(3.0);
@@ -818,7 +807,7 @@ public class FXMLGameBoardController implements Initializable {
         int inner_pad = 3;
         int border_width = 4;
         gc.clearRect(PAD + row * (CELL_SIZE + border_width), PAD + col * (CELL_SIZE + border_width), CELL_SIZE, CELL_SIZE);
-        
+
         gc.fillRect(PAD + row * (CELL_SIZE + border_width), PAD + col * (CELL_SIZE + border_width), CELL_SIZE, CELL_SIZE);
         gc.setStroke(Color.SLATEBLUE);
         gc.setLineWidth(3.0);
@@ -840,24 +829,24 @@ public class FXMLGameBoardController implements Initializable {
         gc.setStroke(Color.CADETBLUE);
         gc.strokeRect(2, 2, PAD + n * (CELL_SIZE + 4), PAD + n * (CELL_SIZE + 4));
     }
-    
-    public static int getScore1(){
+
+    public static int getScore1() {
         return score1;
     }
-    
-    public static int getScore2(){
+
+    public static int getScore2() {
         return score2;
     }
-    
-    public static GameState getCurrentState(){
+
+    public static GameState getCurrentState() {
         return currentState;
     }
-    
-    public static String getUsername1(){
+
+    public static String getUsername1() {
         return userName1;
     }
-    
-    public static String getUsername2(){
+
+    public static String getUsername2() {
         return userName2;
     }
 }

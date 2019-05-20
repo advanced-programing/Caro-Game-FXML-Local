@@ -18,7 +18,10 @@ import javafx.scene.control.Button;
  * @author USER
  */
 public class ChooseLevelBoxController implements Initializable {
-
+    private Hellofxml application; 
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     /**
      * Initializes the controller class.
      */
@@ -52,7 +55,7 @@ public class ChooseLevelBoxController implements Initializable {
     
     @FXML
     private void goHome() throws IOException{
-        Hellofxml.setMainMenu();
+        application.setMainMenu();
     }
     
     @Override

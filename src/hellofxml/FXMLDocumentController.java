@@ -24,10 +24,14 @@ import javafx.stage.Stage;
  *
  * @author USER
  */
-public class FXMLDocumentController {
+public class FXMLDocumentController implements Initializable{
     //@FXML -> lien ket thanh phan trong view va controller
     //su dung css de tao format cho giao dien
     //1 fxml ưng voi 1 controller
+    private Hellofxml application;
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     
     @FXML
     private Label message;
@@ -40,22 +44,23 @@ public class FXMLDocumentController {
     @FXML 
     private Button quit;
     
+    
     @FXML
     private void handleGameSize(ActionEvent event) throws IOException{
-        Hellofxml.setGameSizeMenu();
+        application.setGameSizeMenu();
     }
     
     @FXML
     void handleGameType(ActionEvent event) throws IOException{
-        Hellofxml.setGameTypeMenu();
+        application.setGameTypeMenu();
     }
     
     @FXML
     void startGame(ActionEvent event) throws IOException{
         if(FXMLGameTypeController.type==1)
-            Hellofxml.setPlayerInforBox();
+            application.setPlayerInforBox();
         else
-            Hellofxml.setGameBoardMenu();
+            application.setGameBoardMenu();
     }
     
     @FXML
@@ -63,7 +68,6 @@ public class FXMLDocumentController {
         Platform.exit();
     }
     
-    @FXML
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    

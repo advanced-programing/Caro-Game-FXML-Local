@@ -9,37 +9,45 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/lableStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.FXMLGameTypeController">
-   <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background">
-         <top>
-            <Label prefHeight="155.0" prefWidth="333.0" text="Choose Type of Game" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-         </top>
-         <center>
-            <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="playerTypeButton" mnemonicParsing="false" onAction="#playerTypeAction" prefHeight="32.0" prefWidth="215.0" styleClass="button2" text="Play with another player">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Button>
-                  <Button fx:id="computerTypeButton" mnemonicParsing="false" onAction="#computerTypeAction" prefHeight="30.0" prefWidth="215.0" styleClass="button2" text="Play with computer">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Button>
-                  <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" prefHeight="30.0" prefWidth="215.0" styleClass="button3" text="Home">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </VBox>
-         </center>
-      </BorderPane>
-   </children>
+    <children>
+        <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background">
+            <top>
+                <Label prefHeight="155.0" prefWidth="333.0" text="Choose Type of Game" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Label>
+            </top>
+            <center>
+                <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="playerTypeButton" mnemonicParsing="false" onAction="#playerTypeAction" prefHeight="32.0" prefWidth="215.0" styleClass="button2" text="Play with another player">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="computerTypeButton" mnemonicParsing="false" onAction="#computerTypeAction" prefHeight="30.0" prefWidth="215.0" styleClass="button2" text="Play with computer">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Button>
+                        <Button onAction="#playRemote" fx:id="bt_remote" mnemonicParsing="false" prefHeight="30" prefWidth="215" text="Play with Remote Player" styleClass="button2" >
+                            <font>
+                                <Font size="13"/>
+                            </font>
+                        </Button>
+                        
+                        <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" prefHeight="30.0" prefWidth="215.0" styleClass="button3" text="Home">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
 </AnchorPane>

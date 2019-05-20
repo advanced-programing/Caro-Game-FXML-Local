@@ -1,15 +1,27 @@
 package hellofxml;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class PlayerInforBoxController {
+public class PlayerInforBoxController implements Initializable{
     static String name1;
     static String name2;
     
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    private Hellofxml application; 
+    public void setApp(Hellofxml application) {
+        this.application = application; 
+    }
     @FXML
     private Label playerName1;
 
@@ -33,13 +45,13 @@ public class PlayerInforBoxController {
          if(isValid(nameInput1) && isValid(nameInput2)){
                 name1 = nameInput1.getText();
                 name2 = nameInput2.getText();
-                Hellofxml.setGameBoardMenu();
+                application.setGameBoardMenu();
             }
     }
     
     @FXML
     private void cancelAction() throws IOException{
-        Hellofxml.setMainMenu();
+        application.setMainMenu();
     }
     
     private static boolean isValid(TextField name){
