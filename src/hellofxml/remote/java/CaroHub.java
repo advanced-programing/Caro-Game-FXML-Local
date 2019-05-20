@@ -33,6 +33,12 @@ public class CaroHub extends Hub {
             System.out.println("Enjoy your game guys");
         }
     }
+    @Override
+    public void playerDisconnected(int playerID) {
+        state.playerDisconnected = true; 
+        sendToAll(state);
+    
+    }
     
     
 }

@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500" prefWidth="390" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.remote.java.NetSenceController">
+<AnchorPane prefHeight="500" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.remote.java.NetSenceController">
     <stylesheets>
         <URL value="@netsence.css" />
     </stylesheets>
     <children>
-        <GridPane maxWidth="390.0" prefHeight="500.0">
+        <GridPane maxWidth="549.0" prefHeight="500.0" prefWidth="543.0" AnchorPane.rightAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="195.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="195.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="234.0" minWidth="193.0" prefWidth="227.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="282.0" minWidth="178.0" prefWidth="227.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="66.0" />
             </columnConstraints>
             <rowConstraints>
             <RowConstraints prefHeight="390.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="148.0" minHeight="10.0" percentHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="148.0" minHeight="10.0" percentHeight="10.0" prefHeight="46.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <HBox fx:id="pane_board" GridPane.columnSpan="2" />
-                <Label id="lb_turn" fx:id="lb_turn" alignment="TOP_LEFT" text="Networked Caro Game" textFill="#1fb230" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                <Label id="lb_message" fx:id="lb_message" alignment="CENTER" contentDisplay="CENTER" text="message" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                <HBox fx:id="pane_board" prefHeight="390.0" prefWidth="390.0" GridPane.columnSpan="2" />
+                <Label id="lb_turn" fx:id="lb_turn" alignment="CENTER" text="Networked Caro Game" textFill="#1fb230" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <Label id="lb_message" fx:id="lb_message" alignment="CENTER" contentDisplay="CENTER" stylesheets="@netsence.css" text="message" textFill="#d11313" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <Button fx:id="btn_home" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBackHome" text="Go Back Home" wrapText="true" />
+                  <Button fx:id="btn_closecn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeConnection" prefHeight="59.0" prefWidth="85.0" text="Close connection" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </VBox>
             </children>
         </GridPane>
     </children>

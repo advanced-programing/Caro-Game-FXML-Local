@@ -95,7 +95,7 @@ public class Hub {
         }
     }
 
-    private void playerDisconnected(int playerID) {
+    protected void playerDisconnected(int playerID) {
     }
     private class Message {
         ConnectionToClient playerConnection;
@@ -303,7 +303,10 @@ public class Hub {
                             }
                         }
                         catch(InterruptedException e) {
-                        }                        
+                        }    
+                        catch(EOFException e) {
+                            
+                        }
                     }
                 } catch (Exception e) {
                     if (!closed) {

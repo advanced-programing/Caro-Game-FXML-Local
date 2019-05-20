@@ -33,7 +33,7 @@ abstract public class Client {
     }
 
     ; 
-        protected void playerConnected(int departingPlayerID) {
+    protected void playerConnected(int departingPlayerID) {
     }
 
     protected void connectionClosedByError(String message) {
@@ -54,6 +54,10 @@ abstract public class Client {
             throw new IllegalStateException("Message cannot be sent. Connection alreadly terminated"); 
         connection.send(message); 
     }   
+    public void disconnect() {
+        if (!connection.closed)
+            connection.send(new DisconnectMessage("Goodbye Hub"));
+    }
     private class ConnectionToHub {
 
         private int id_number;
@@ -86,7 +90,7 @@ abstract public class Client {
             sendThread.start();
             receiveThread.start();
         }   
-        void close() {
+        public void close() {
             closed = true;
             sendThread.interrupt();
             receiveThread.interrupt();

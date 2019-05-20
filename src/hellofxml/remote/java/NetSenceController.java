@@ -10,11 +10,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -39,6 +41,10 @@ public class NetSenceController implements Initializable {
     private Hellofxml application;
     @FXML
     private Label lb_turn;
+    @FXML
+    private Button btn_home;
+    @FXML
+    private Button btn_closecn;
 
     public void setApp(Hellofxml application) {
         this.application = application;
@@ -231,6 +237,18 @@ public class NetSenceController implements Initializable {
         if (row >= 0 && row < board_size && col >= 0 && col < board_size && state.playingMap[row][col] == 0) {
             connection.send(new int[] {row, col}); 
         }
+    }
+
+    @FXML
+    private void goBackHome(ActionEvent event) {
+        connection.disconnect();
+        application.setMainMenu();
+    }
+
+    @FXML
+    private void closeConnection(ActionEvent event) {
+        lb_message.setText("You closed connection!");
+        connection.disconnect();
     }
 
     private class CaroClient extends Client {
