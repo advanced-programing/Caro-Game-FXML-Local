@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="450.0" stylesheets="@../style/lableStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofxml.NoticeBoxController">
    <children>
-      <VBox fx:id="noticeButton" prefHeight="200.0" prefWidth="500.0" spacing="20.0" styleClass="sub_background">
+      <VBox fx:id="noticeButton" prefHeight="150.0" prefWidth="500.0" spacing="20.0" styleClass="sub_background">
          <children>
             <Label fx:id="noticeLabel" styleClass="label3" text="Notice: ">
                <font>
@@ -22,7 +22,7 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label styleClass="label4" text="Total Score: ">
+                  <Label prefHeight="25.0" prefWidth="130.0" styleClass="label4" text="Total Score: ">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -39,7 +39,7 @@
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="60.0" right="40.0" top="20.0" />
+                  <Insets bottom="20.0" left="60.0" right="20.0" top="20.0" />
                </padding>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
